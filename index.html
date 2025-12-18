@@ -484,32 +484,12 @@ function showCtaButton() {
   }
 }
 
-// Aguardar o smartplayer estar disponível e configurar o evento
-function setupSmartplayerTracking() {
-  if (typeof smartplayer === "undefined" || !(smartplayer.instances && smartplayer.instances.length)) {
-    console.log('Aguardando smartplayer...');
-    setTimeout(setupSmartplayerTracking, 500);
-    return;
-  }
-
-  console.log('Smartplayer detectado, configurando tracking...');
-  const player = smartplayer.instances[0];
-
-  // Evento de progresso do vídeo
-  player.on('timeupdate', function(event) {
-    const currentTime = event.detail.currentTime;
-
-    // Mostrar botão após 10 segundos
-    if (currentTime >= 10 && !ctaButtonShown) {
-      console.log('10 segundos atingidos, mostrando botão CTA');
-      showCtaButton();
-    }
-  });
-}
-
-// Iniciar o tracking
-console.log('Iniciando tracking do botão CTA...');
-setupSmartplayerTracking();
+// Mostrar botão após 10 segundos da página carregar
+console.log('Iniciando timer de 10 segundos para o botão CTA...');
+setTimeout(function() {
+  console.log('10 segundos decorridos, mostrando botão CTA');
+  showCtaButton();
+}, 10000);
 </script>
 
 </body></html>
