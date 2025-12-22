@@ -483,6 +483,19 @@ function showCtaButton() {
 
     ctaButtonShown = true;
     showDTC = true;
+
+    // Pausar o vídeo quando o botão DTC é exibido
+    try {
+      if (typeof smartplayer !== 'undefined' && smartplayer.instances && smartplayer.instances.length > 0) {
+        const player = smartplayer.instances[0];
+        if (player && typeof player.pause === 'function') {
+          player.pause();
+          console.log('Vídeo pausado automaticamente ao exibir o botão DTC');
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao pausar o vídeo:', error);
+    }
   } else {
     console.error('Botão CTA não encontrado no DOM');
   }
